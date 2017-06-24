@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>EE284-WebRTC App</title>
+	<!-- Bootstrap -->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<!-- This is the top level navigation, it stays visible throughout the app -->
+	<nav class="navbar navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="javascript:void(0)"><i class="fa fa-heartbeat"></i> Dial-A-Doc</a>
+			</div>
+			<ul class="nav navbar-nav menu-right">
+				<li><a href="https://twitter.com/vaideheebarde">@vaideheebarde</a></li>
+				<li><a href="https://twitter.com/saishruthi10">@saishruthi10</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- This is the initial landing page where you choose to enter as a patient or as a doctor -->
+	<div id="landingPage" class="mastHead landing-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2 ">
+					<div class="starter-text">
+						<h1><strong>EE284-WebRTC</strong> Medical App</h1>
+						<p class="lead">WebRTC is fun!</p>
+					</div>
+					<div class="starter-call-to-action">
+						<a href="" id="enterAsPatient" class="call-group">Enter As Patient</a>
+						<a href="" id="enterAsDoctor" class="call-group">Enter As Doctor</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="patientEntry" class="mastHead" style="display: none;">
+		<div class="signin-to-app">
+			<h2>Welcome to Dial-A-Doc!</h2>
+			<div id="requestDoctorForm">
+				<p>We will connect you with a doctor after you<br>tell us some basic information…</p>
+				<form class="form-inline">
+					<div class="form-group">
+						<input id="patientName" class="input-styled" type="text" class="form-control" id="" value="Your Name">
+						<button id="requestDoctor" class="input-styled" type="button">Request a Doctor</button>
+					</div>
+				</form>
+			</div>
+			<div id="waitingForDoctor" class="loading-wrap" style="display: none;">
+				<span>Waiting for a doctor to arrive...</span>
+				<div class="progress">
+					<div id="waitingForDoctorProgress" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+						<span class="sr-only"></span>
+					</div>
+				</div>
+			</div>
+			<div id="doctorListing" class="doctor-info" style="display: none;">
+				<div class="doc-img">
+					<img src="images/doctor.jpg">
+				</div>
+				<div class="doc-text">
+					<span class="name">The Dr. will see you now!</span>
+					<span class="specialty"></span>
+					<button id="callDoctor" class="input-styled" type="button">Call the doc</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="doctorSignup" class="mastHead" style="display: none;">
+		<div class="signin-to-app signin-doctor">
+			<h2>What’s up Doc?</h2>
+			<p>There are probably patients waiting to talk with you.<br><small>Just enter your name and press the button to wait for a call!</small></p>
+			<div id="doctorSignupForm">
+				<form class="form-inline">
+					<div class="form-group">
+						<input class="input-styled" type="text" class="form-control" id="doctorName" value="Your Name">
+						<input class="input-styled" type="text" class="form-control" id="doctorSpecialty" value="Your Specialty">
+						<button id="doctorSignupButton" class="input-styled" type="button">Wait for Patient</button>
+					</div>
+				</form>
+			</div>
+			<div id="waitingForPatient" class="loading-wrap" style="display: none;">
+				<span>Waiting for patients to contact you...</span>
+				<div class="progress">
+					<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+						<span class="sr-only"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="videoPage" class="mastHead" style="display: none;">
+		<div class="video-page-holder video-page-holder-horizontal">
+			<div class="left">
+				<div class="video-wrap">
+					<div class="main-video">
+						<video id="mainVideoTag" class="" autoplay></video>
+					</div>
+					<div class="small-video">
+						<video id="smallVideoTag" autoplay muted="muted"></video>
+					</div>
+				</div>
+				<div class="actions-holder">
+					<a id="muteMyself" class="input-styled" href="javascript:void(0)">Mute Myself</a>
+					<a id="pauseMyVideo" class="input-styled" href="javascript:void(0)">Pause Video</a>
+				</div>
+			</div>
+			<div class="right">
+				<div id="messageHolder" class="message-holder">
+					<div id="messageInName" class="message-in"></div>
+					<div id="messageOutName" class="message-out"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Our project javascript files -->
+	<script src="js/webrtc.js"></script>
+	<script src="js/app.js"></script>
+	</body>
+</html>
