@@ -1,7 +1,7 @@
 # Telemedicine-application-web-app-using-WebRTC-API
 A medical web application created so that doctors around the world can communicate with patients using WebRTC APIs 
 
-PeerConnection
+- PeerConnection
 A PeerConnection allows two users to communicate directly, browser-to-browser. It then represents an association with a remote peer, which is usually another instance of the same JavaScript application running at the remote end. Communications are coordinated via a signaling channel provided by scripting code in the page via the web server, e.g., using XMLHttpRequest or WebSocket. Once a peer connection is established, media streams (locally associated with ad hoc defined MediaStream objects) can be sent directly to the remote Browser. The peer-connection mechanism uses the Interactive Connectivity Establishment (ICE) protocol together with the Session Traversal Utilities for NAT (STUN) and Traversal Using Relays around NAT (TURN) servers to let UDP-based media streams traverse NAT boxes and firewalls. ICE allows the browsers to discover enough information about the topology of the network where they are deployed, so to find the best exploitable communication path. Using ICE provides also a security measure, as it prevents untrusted web pages and applications from sending data to hosts that are not expecting to receive them.
 
 ![image](https://user-images.githubusercontent.com/22990797/128346172-6720627b-8dbb-418f-9a90-3a18877f3000.png)
@@ -12,7 +12,7 @@ Each signaling message is fed into the receiving PeerConnection upon arrival. 
 
 As the above figure of the WebRTC protocol stack shows, in a multimedia communication each medium is typically carried in a separate RTP session with its own RTCP packets. However, to overcome the issue of opening a new hole for each stream used, the IETF is currently working on the possibility to reduce the number of transport layer ports consumed by RTP-based real-time applications by combining (i.e., multiplexing) multimedia traffic in a single RTP session.
 
-Data Channel
+- Data Channel
 The Data Channel is designed to provide a generic transport service allowing Web Browsers to exchange generic data in a bidirectional peer-to-peer fashion.
 The encapsulation of SCTP over DTLS over ICE over UDP provides a NAT traversal solution together with confidentiality, source authentication, and integrity protected transfers. Moreover, this solution allows the data transport to interwork smoothly with the parallel media transports, and both can potentially also share a single transport-layer port number. SCTP has been chosen since it natively supports multiple streams with either reliable or partially-reliable delivery modes. It provides the possibility to open several independent streams within an SCTP association towards a peering SCTP endpoint. Each stream represents a unidirectional logical channel providing the notion of in-sequence delivery. A message sequence can be sent either ordered or unordered. The message delivery order is preserved only for all ordered messages sent on the same stream. However, the DataChannel API has been designed to be bidirectional, which means that each DataChannel is composed as a bundle of an incoming and an outgoing SCTP
 stream.
